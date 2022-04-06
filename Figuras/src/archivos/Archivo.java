@@ -16,16 +16,17 @@ public class Archivo implements Runnable{
         this.nombreArchivo = nombreArchivo + ".txt";
         this.datos = datos;
     }
+
     @Override
     public void run() {
         crearDirectorio();
         int isSaved = 0;
-
+        //* Menu that will be displayed till the file is saved
         while(verificarArchivo(this.nombreArchivo) && isSaved == 0){
             int opt = Integer.parseInt(JOptionPane.showInputDialog(Mensajes.ARCHIVO_EXISTE));
             switch (opt){
                 case 1:
-                    //*Sobreescribiendo el archivo
+                    //*Overwriting the file
                     this.archivo.delete();
                     try {
                         this.archivo.createNewFile();
@@ -62,7 +63,7 @@ public class Archivo implements Runnable{
         String rutaHijo = this.rutaPadre + "/" + nombreAVerificar;
         this.archivo  = new File(rutaHijo);
 
-        //* Si no existe lo creamos
+        //* If file does not exist, will be created
         if(!this.archivo.exists()){
             try {
                 this.archivo.createNewFile();
